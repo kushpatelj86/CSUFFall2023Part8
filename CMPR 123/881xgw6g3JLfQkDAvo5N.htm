@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xyleme Syndicate Portal</title>
+
+  
+  <script type="text/javascript" nonce="3b0d6e16100844dfb1d024e07f6" src="//local.adguard.org?ts=1692627251460&amp;type=content-script&amp;dmn=vmware.bravais.com&amp;url=https%3A%2F%2Fvmware.bravais.com%2Fs%2F881xgw6g3JLfQkDAvo5N&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script>
+<script type="text/javascript" nonce="3b0d6e16100844dfb1d024e07f6" src="//local.adguard.org?ts=1692627251460&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link href="/static/hgaZYVnmSoYxrmqtk2gNsKg5zjZ9zzApIZK2C37SmjV.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<script src="/static/jFhxWUQOVAQCVC7o5cECk0HKoAgWuetcFgmdBFlBqgV.js" type="text/javascript" ></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/static/jgnfXTjHdhJN35VG6M6trq40KmbnRZubX4TExVhhlug.css" type="text/css" rel="stylesheet" media="screen, projection" />
+
+
+
+
+  <script>
+    function sameOrigin(href, origin) {
+      return origin.endsWith(href.match(/https?:\/\/[^\/]*\.([^\/:\.]*\.[^\/:\.]*).[^\/:]*\//)[1]);
+    }
+
+    // listen to message from content window
+    window.addEventListener('message', function(event) {
+
+      if (event.data === 'getQueryString') {
+        const queryString = Object.fromEntries(new URLSearchParams(document.location.search).entries())
+        $('iframe')[0].contentWindow.postMessage({queryString}, "*");
+      }
+
+      if (!sameOrigin(document.location.href, event.origin)) {
+        return;
+      }
+      var state = event.data;
+      if (state.typeMessage && state.typeMessage === 'navigation' && (typeof state.playerType === 'string') && state.playerType === '') {
+        updateUrlWithPageSection(window, state.page, state.section);
+      }
+    }, false);
+
+    function updateUrlWithPageSection(window, page, section) {
+      var filteredSearchStr = window.location.search;
+      if (filteredSearchStr) {
+        var params = new URLSearchParams(filteredSearchStr);
+        params.delete('page');
+        params.delete('section');
+        filteredSearchStr = params.toString() ? ('?' + params.toString()) : '';
+      }
+      var newUrl = (filteredSearchStr ? (filteredSearchStr + '&') : '?') + 'page=' + page + (section ? ('&section=' + section) : '');
+
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    var authCookieName = 'Bravais-prod-eu-Context';
+    var authCookieSharedName = 'CDS-prod-eu-Shared';
+    var directCoreBaseUrl = 'https://core-vmware.bravais.com';
+    var coreBaseUrl = directCoreBaseUrl;
+    var webPortalUrl = 'https://vmware.bravais.com';
+    var lrsStatementsUrl = 'https://lrs-vmware.bravais.com/XAPI/statements';
+    var restPattern = '/api/v3';
+    var rootGroupName = 'All users';
+    var adminFirstName = 'Application';
+    var adminLastName = 'Administrator';
+    var adminGroupName = 'Admins';
+    var sessionData = {"protectPii":false,"tenantName":"vmware","xApiTenantId":"https://vmware.bravais.com","userLastName":"Learner","trustedDomains":[],"anonymousUser":true,"userFirstName":"Anonymous","isInAdmins":false,"userId":"anonymous","class":"SessionData","webPortalUrl":"https://vmware.bravais.com"};
+    var dictionary = 'en-US';
+    var enableConsumerReact = 'true';
+  </script>
+
+  <!--[if lte IE 9]>
+  <script>
+    var coreBaseUrl = '/proxy/core';
+    var lrsStatementsUrl = '/proxy/lrs/XAPI/statements';
+  </script>
+  <![endif]-->
+
+  <script>var Browser = {isIE: false};</script>
+  <!--[if IE]>
+  <script>Browser = {isIE: true};</script>
+  <![endif]-->
+</head>
+
+<body data-ng-cloak class="document-preview-body ng-cloak">
+
+  
+
+
+
+<title></title>
+
+
+
+  
+
+  <script>
+    // We need to remove preview elements before closing the window
+    // to invoke document's onunload event (LOR-4974)
+    window.onunload = function() {
+      $("#shared-document-preview").remove();
+    };
+  </script>
+
+  <link rel="stylesheet" type="text/css" id="custom-style"
+      href="https://core-vmware.bravais.com/api/v3/resources/custom.css?useCache=true">
+  <div data-ng-controller="SharedDocumentPreviewController"
+       data-ng-init="initialize('881xgw6g3JLfQkDAvo5N', '', '', true)"
+       data-ng-show="showPage"
+       id="shared-document-preview">
+
+    <div class="preview-container"
+         ng-if="showPreview">
+      <iframe allowfullscreen="true"
+              style="border:0; position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%"
+              iframe-src="{{previewUrl}}"
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              title="{{courseName}}"
+              name="{{courseName}}">
+      </iframe>
+    </div>
+    <div class="alternative-preview text-center"
+         data-ng-if="showAlternativePreview">
+      <div class="{{document.icon}}"></div>
+
+      <div>{{'document.preview.not.available' | i18n}}</div>
+      <button class="btn btn-default"
+              ng-click="downloadDocument()">
+        <i class="fa fa-spinner" ng-show="downloadDocumentInProgress"></i>
+        <i class="fa fa-download" ng-hide="downloadDocumentInProgress"></i>
+        {{downloadButtonLabel | i18n}}
+      </button>
+    </div>
+
+    <div class="new-window-preview text-center"
+         data-ng-show="showPreviewInNewWindow && document">
+
+      <label>{{'document.preview.open.in.new.window' | i18n}}</label>
+
+      <p>
+        <a href="{{previewUrl}}" ng-click="showPreviewInNewWindowClick" target="_blank">
+          {{'document.preview.click.in.new.window' | i18n}}
+        </a>
+      </p>
+    </div>
+
+    
+    <div class="shared-document-error"
+         data-ng-if="showErrorMessage"
+         data-ng-switch on="errorCode">
+      <i class="fa fa-warning"></i>
+
+      <p class="message" data-ng-switch-when="403">
+        {{ coreErrorMessage ? coreErrorMessage : ('share.preview.error.403' | i18n) }}
+      </p>
+
+      <p class="message" data-ng-switch-default>
+        {{ coreErrorMessage ? coreErrorMessage : ('share.preview.error.404' | i18n) }}
+      </p>
+    </div>
+  </div>
+
+
+  <script src="/static/CwTFi05JjK2lfnkXmfeG58gGEKKSYQqs2e33jtJP79t.js" type="text/javascript" ></script>
+<script src="/static/ppqBc5F153zaw3ovzmc68Uq5LcSZcFKcbYii85LNZxx.js" type="text/javascript" ></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/static/D9KFHm7opM7bzkdC8ZIcXSTU5yFu6rQF5WioLBOZ3iA.js" type="text/javascript" ></script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
